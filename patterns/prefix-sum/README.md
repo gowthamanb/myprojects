@@ -146,21 +146,41 @@ Prefix sums only work for operations that have an **inverse** (`+` has `−`, XO
 6. **Overwriting the first index** in "longest" problems: use `putIfAbsent`.
 7. **Autoboxing cost**: when keys fall in a small known range (as with mod k), use an `int[]` instead of a `HashMap`.
 
-## 7. Practice list (rough order)
+## 7. Practice path: beginner to advanced
 
-1. LC 303 Range Sum Query – Immutable
-2. LC 724 Find Pivot Index
-3. LC 1480 Running Sum of 1d Array
-4. LC 238 Product of Array Except Self
-5. LC 560 Subarray Sum Equals K
-6. LC 325 Maximum Size Subarray Sum Equals k
-7. LC 525 Contiguous Array
-8. LC 974 Subarray Sums Divisible by K
-9. LC 523 Continuous Subarray Sum
-10. LC 1442 Count Triplets That Can Form Two Arrays of Equal XOR
-11. LC 304 Range Sum Query 2D – Immutable
-12. LC 1109 Corporate Flight Bookings
-13. LC 1074 Number of Submatrices That Sum to Target
+Work through the problems in order. Each one adds a single new idea on top of the ones before it.
+Solve it yourself first, then compare with the solution file in this folder where there is one.
+
+### Level 1: Build and use a prefix array
+
+| # | Problem | Difficulty | New idea | Solution |
+|---|---|---|---|---|
+| 1 | [LC 1480 Running Sum of 1d Array](https://leetcode.com/problems/running-sum-of-1d-array/) | Easy | Build a running total | — |
+| 2 | [LC 303 Range Sum Query – Immutable](https://leetcode.com/problems/range-sum-query-immutable/) | Easy | `sum(l..r) = prefix[r+1] - prefix[l]` and the leading 0 | [`RangeSum.java`](RangeSum.java) |
+| 3 | [LC 724 Find Pivot Index](https://leetcode.com/problems/find-pivot-index/) | Easy | Running left sum + total gives the right sum | [`PivotIndex.java`](PivotIndex.java) |
+| 4 | [LC 238 Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | Medium | Prefix from the left and suffix from the right; works for products too | [`ProductExceptSelf.java`](ProductExceptSelf.java) |
+| 5 | [LC 1310 XOR Queries of a Subarray](https://leetcode.com/problems/xor-queries-of-a-subarray/) | Medium | Any operation with an inverse works (XOR) | [`XorQueries.java`](XorQueries.java) |
+
+### Level 2: Prefix sum + HashMap
+
+| # | Problem | Difficulty | New idea | Solution |
+|---|---|---|---|---|
+| 6 | [LC 560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | Medium | Look up `sum - k` in a map of **counts**; seed `0 → 1` | [`SubarraySumEqualsK.java`](SubarraySumEqualsK.java) |
+| 7 | [LC 325 Maximum Size Subarray Sum Equals k](https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/) *(Premium)* | Medium | Map of **first index**; seed `0 → -1`; `putIfAbsent` | [`MaxSubarrayLenSumK.java`](MaxSubarrayLenSumK.java) |
+| 8 | [LC 525 Contiguous Array](https://leetcode.com/problems/contiguous-array/) | Medium | Transform the input (`0 → -1`) so the condition becomes sum = 0 | [`ContiguousArray.java`](ContiguousArray.java) |
+| 9 | [LC 974 Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/) | Medium | Key on the remainder; fix Java's negative `%` | [`SubarraysDivByK.java`](SubarraysDivByK.java) |
+| 10 | [LC 523 Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/) | Medium | Remainder + first index, with a minimum-length constraint | — |
+
+### Level 3: Advanced
+
+| # | Problem | Difficulty | New idea | Solution |
+|---|---|---|---|---|
+| 11 | [LC 1109 Corporate Flight Bookings](https://leetcode.com/problems/corporate-flight-bookings/) | Medium | Difference array: O(1) range updates, then one prefix pass | [`DifferenceArray.java`](DifferenceArray.java) |
+| 12 | [LC 304 Range Sum Query 2D – Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/) | Medium | 2D prefix sums and inclusion–exclusion | [`RangeSum2D.java`](RangeSum2D.java) |
+| 13 | [LC 1442 Count Triplets That Can Form Two Arrays of Equal XOR](https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/) | Medium | Prefix XOR + map that tracks both counts and sums of indices | — |
+| 14 | [LC 1074 Number of Submatrices That Sum to Target](https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/) | Hard | Fix a pair of rows, collapse to 1D, then apply the LC 560 technique | — |
+
+**Tip:** If LC 325 is locked, practise the same technique with LC 525 and come back to 325 later.
 
 ## Running the examples
 
